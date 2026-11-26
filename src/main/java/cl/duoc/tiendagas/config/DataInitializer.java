@@ -89,7 +89,17 @@ public class DataInitializer {
                     boleta(jorge, ahora.minusMonths(3), EstadoBoleta.ENTREGADA, "BIENVENIDO5",
                             new Object[]{cil11, 3}, new Object[]{manguera, 2}),
                     boleta(camila, ahora.minusMonths(6), EstadoBoleta.CANCELADA, null,
-                            new Object[]{anafe, 1})
+                            new Object[]{anafe, 1}),
+                    // Más compras repartidas en el tiempo, para que el dashboard
+                    // muestre números distintos en semana, mes y año.
+                    boleta(valentina, ahora.minusHours(3), EstadoBoleta.PENDIENTE, null,
+                            new Object[]{cil11, 1}, new Object[]{manguera, 1}),
+                    boleta(valentina, ahora.minusDays(10), EstadoBoleta.ENTREGADA, null,
+                            new Object[]{cil5, 2}),
+                    boleta(ignacio, ahora.minusDays(1), EstadoBoleta.EN_REPARTO, "GASVOLCAN10",
+                            new Object[]{cocinilla, 1}, new Object[]{regulador, 1}),
+                    boleta(ignacio, ahora.minusMonths(8), EstadoBoleta.ENTREGADA, null,
+                            new Object[]{cil11, 2}, new Object[]{calefont, 1})
             ));
         };
     }

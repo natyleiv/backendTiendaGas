@@ -269,7 +269,7 @@ class IntegracionApiTests {
 
         mvc.perform(get("/api/v1/boletas").header("Authorization", vendedor))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(5)));
+                .andExpect(jsonPath("$", hasSize(9)));
 
         mvc.perform(patch("/api/v1/boletas/1/estado").header("Authorization", vendedor)
                         .contentType(MediaType.APPLICATION_JSON).content("{\"estado\":\"EN_REPARTO\"}"))
@@ -293,7 +293,7 @@ class IntegracionApiTests {
     void reportes() throws Exception {
         mvc.perform(get("/api/v1/reportes/resumen?periodo=todo").header("Authorization", bearer(login("admin@duoc.cl", "admin123"))))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.totalBoletas").value(5))
+                .andExpect(jsonPath("$.totalBoletas").value(9))
                 .andExpect(jsonPath("$.boletasPorEstado.CANCELADA").value(1))
                 .andExpect(jsonPath("$.masVendidos[0].nombre").value("Cilindro de Gas 11 kg"));
         mvc.perform(get("/api/v1/reportes/resumen").header("Authorization", bearer(login("vendedor@duoc.cl", "vende123"))))
