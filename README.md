@@ -25,7 +25,9 @@ El frontend (React) está en: https://github.com/natyleiv/tienda-gas-react
    (o el botón *Run* de `TiendagasApplication` en el IDE).
 4. Abre Swagger: http://localhost:8080/swagger-ui.html
 
-La primera vez se cargan datos de prueba: 3 categorías, 12 productos, 4 usuarios y 5 compras de ejemplo.
+La primera vez se cargan datos de prueba: 3 categorías, 12 productos, 6 usuarios, 9 compras de ejemplo (repartidas en el tiempo para que el dashboard cambie según el periodo) y 2 consultas de contacto.
+
+Los datos de prueba solo se cargan si la base está vacía. Para volver a empezar, elimina la base `bd_tienda_gas` en phpMyAdmin y vuelve a ejecutar el backend.
 
 ## Usuarios de prueba
 
@@ -35,6 +37,8 @@ La primera vez se cargan datos de prueba: 3 categorías, 12 productos, 4 usuario
 | Vendedor | vendedor@duoc.cl | vende123 |
 | Cliente | cliente@duoc.cl | cliente123 |
 | Cliente | jorge@duoc.cl | jorge123 |
+| Cliente | valentina@gmail.com | vale123 |
+| Cliente | ignacio@duoc.cl | igna123 |
 
 Las contraseñas se guardan con hash **BCrypt** (en la tabla `usuario` se ve algo como `$2a$10$...`).
 
@@ -57,6 +61,8 @@ src/main/java/cl/duoc/tiendagas
 ```text
 USUARIO 1 ──< BOLETA 1 ──< DETALLE_BOLETA >── 1 PRODUCTO >── 1 CATEGORIA
 ```
+
+Diagrama completo con todos los campos: [docs/capturas/modelo-base-de-datos.png](docs/capturas/modelo-base-de-datos.png)
 
 - `producto.categoria_id` → `categoria`
 - `boleta.usuario_id` → `usuario`
@@ -125,4 +131,17 @@ Cupones: `GASVOLCAN10` (10%) y `BIENVENIDO5` (5%).
 .\mvnw.cmd test
 ```
 
+**Resultado: 18 pruebas, 0 fallas, 0 errores** (detalle en [docs/resultados-pruebas.md](docs/resultados-pruebas.md)).
+
 `IntegracionApiTests` levanta la API completa con una base H2 en memoria (no toca MySQL) y prueba 18 casos: login correcto e incorrecto, bloqueo, hash BCrypt, renovación del token, peticiones sin token, registro, CRUD por rol, validaciones, compra con descuento de stock, compra sin stock, historial privado, órdenes y estados, reportes, perfil y Swagger.
+
+## Documentación
+
+| Archivo | Contenido |
+|---|---|
+| [docs/Anexo-2-Documentacion-APIs-e-Integracion.docx](docs/Anexo-2-Documentacion-APIs-e-Integracion.docx) | Documento de APIs e integración: modelo de datos, endpoints, seguridad JWT, integración con el frontend y pruebas |
+| [docs/Anexo-3-Documentacion-APIs.xlsx](docs/Anexo-3-Documentacion-APIs.xlsx) | Tabla con los 31 endpoints: método, ruta, datos de entrada, respuestas y roles |
+| [docs/resultados-pruebas.md](docs/resultados-pruebas.md) | Resultado de las 18 pruebas de integración |
+| [docs/capturas/](docs/capturas/) | Capturas de Swagger (login, Authorize, CRUD de productos, errores 400/401/403) y diagramas |
+
+![Swagger](docs/capturas/01-swagger-general.png)
