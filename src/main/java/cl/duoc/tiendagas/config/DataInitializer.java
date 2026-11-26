@@ -3,6 +3,7 @@ package cl.duoc.tiendagas.config;
 import cl.duoc.tiendagas.model.*;
 import cl.duoc.tiendagas.repository.BoletaRepository;
 import cl.duoc.tiendagas.repository.CategoriaRepository;
+import cl.duoc.tiendagas.repository.ConsultaRepository;
 import cl.duoc.tiendagas.repository.ProductoRepository;
 import cl.duoc.tiendagas.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +24,7 @@ public class DataInitializer {
                                   ProductoRepository productoRepository,
                                   UsuarioRepository usuarioRepository,
                                   BoletaRepository boletaRepository,
+                                  ConsultaRepository consultaRepository,
                                   PasswordEncoder encoder) {
         return args -> {
             if (categoriaRepository.count() > 0) {
@@ -100,6 +102,14 @@ public class DataInitializer {
                             new Object[]{cocinilla, 1}, new Object[]{regulador, 1}),
                     boleta(ignacio, ahora.minusMonths(8), EstadoBoleta.ENTREGADA, null,
                             new Object[]{cil11, 2}, new Object[]{calefont, 1})
+            ));
+
+            // ---- Consultas de ejemplo (formulario de contacto) ----
+            consultaRepository.saveAll(List.of(
+                    new Consulta(null, "Rosa Martínez", "rosa@gmail.com",
+                            "¿Hacen despacho a Coihueco? Necesito dos cilindros de 15 kg.", ahora.minusDays(3)),
+                    new Consulta(null, "Luis Torres", "luis@duoc.cl",
+                            "Quisiera saber si el calefont incluye instalación.", ahora.minusDays(1))
             ));
         };
     }
