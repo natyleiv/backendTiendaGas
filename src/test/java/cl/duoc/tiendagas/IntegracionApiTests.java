@@ -207,7 +207,7 @@ class IntegracionApiTests {
                 .andExpect(status().isForbidden());
         mvc.perform(get("/api/v1/usuarios").header("Authorization", bearer(login("admin@duoc.cl", "admin123"))))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(4)))
+                .andExpect(jsonPath("$", hasSize(6)))
                 .andExpect(jsonPath("$[0].password").doesNotExist());
     }
 

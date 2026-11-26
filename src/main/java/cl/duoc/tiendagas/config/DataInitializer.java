@@ -71,7 +71,11 @@ public class DataInitializer {
                     LocalDate.of(2000, 1, 15), "Biobío", "Calle Los Aromos 321, Concepción", Rol.CLIENTE);
             Usuario jorge = usuario("15432198-5", "Jorge", "Muñoz", "jorge@duoc.cl", encoder.encode("jorge123"),
                     LocalDate.of(1978, 6, 3), "Ñuble", "Pasaje El Roble 87, San Carlos", Rol.CLIENTE);
-            usuarioRepository.saveAll(List.of(admin, vendedor, camila, jorge));
+            Usuario valentina = usuario("19876543-0", "Valentina", "Pérez", "valentina@gmail.com", encoder.encode("vale123"),
+                    LocalDate.of(1998, 11, 2), "Ñuble", "Av. O'Higgins 1540, Chillán", Rol.CLIENTE);
+            Usuario ignacio = usuario("17654321-3", "Ignacio", "Herrera", "ignacio@duoc.cl", encoder.encode("igna123"),
+                    LocalDate.of(1990, 3, 21), "Ñuble", "Los Carrera 455, Bulnes", Rol.CLIENTE);
+            usuarioRepository.saveAll(List.of(admin, vendedor, camila, jorge, valentina, ignacio));
 
             // ---- Compras de ejemplo (para el historial y el dashboard) ----
             LocalDateTime ahora = LocalDateTime.now();
